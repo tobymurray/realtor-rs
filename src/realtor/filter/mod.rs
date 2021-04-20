@@ -1,3 +1,5 @@
+pub mod builder;
+
 #[derive(Debug)]
 pub enum Language {
   English,
@@ -6,7 +8,7 @@ pub enum Language {
 
 impl Default for Language {
   fn default() -> Self {
-      Language::English
+    Language::English
   }
 }
 
@@ -18,7 +20,7 @@ pub enum Application {
 
 impl Default for Application {
   fn default() -> Self {
-      Application::Browser
+    Application::Browser
   }
 }
 
@@ -36,13 +38,11 @@ pub enum PropertySearchType {
 
 impl Default for PropertySearchType {
   fn default() -> Self {
-      PropertySearchType::Any
+    PropertySearchType::Any
   }
 }
 
-pub enum FarmType {
-  
-}
+pub enum FarmType {}
 
 pub enum ParkingType {}
 
