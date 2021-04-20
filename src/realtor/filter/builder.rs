@@ -154,7 +154,7 @@ impl FilterBuilder {
     // Required properties
     query_params.push((
       FilterBuilder::CULTURE_ID,
-      match self.language.unwrap_or_else(|| Language::default()) {
+      match self.language.unwrap_or_else(Language::default) {
         Language::English => 1.to_string(),
         Language::French => 2.to_string(),
       },
@@ -162,7 +162,7 @@ impl FilterBuilder {
 
     query_params.push((
       FilterBuilder::APPLICATION_ID,
-      match self.application.unwrap_or_else(|| Application::default()) {
+      match self.application.unwrap_or_else(Application::default) {
         Application::Browser => 1.to_string(),
         Application::Mobile => 37.to_string(),
       },
@@ -173,7 +173,7 @@ impl FilterBuilder {
       FilterBuilder::PROPERTY_SEARCH_TYPE_ID,
       match self
         .property_search_type
-        .unwrap_or_else(|| PropertySearchType::default())
+        .unwrap_or_else(PropertySearchType::default)
       {
         PropertySearchType::Any => 0.to_string(),
         PropertySearchType::Residential => 1.to_string(),
