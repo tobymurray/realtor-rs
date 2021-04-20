@@ -8,8 +8,7 @@ license = "CC-BY-NC-4.0"
 documentation = "https://docs.rs/crate/realtor-rs/"
 readme = "README.md"
 repository = "https://github.com/tobymurray/realtor-rs"
-keywords = ["realtor", "api", "client", "wrapper", "house", "listing", "mls"]
-
+keywords = ["realtor", "api", "client", "house", "listing"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
