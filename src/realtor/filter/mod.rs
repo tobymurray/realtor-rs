@@ -57,3 +57,40 @@ pub enum Transactiontype {}
 pub enum SortBy {}
 
 pub enum SortOrder {}
+
+trait FilterValue {
+  fn value(&self) -> &'static str;
+}
+
+impl FilterValue for Language {
+  fn value(&self) -> &'static str {
+    match self {
+      Language::English => "1",
+      Language::French => "2",
+    }
+  }
+}
+
+impl FilterValue for Application {
+  fn value(&self) -> &'static str {
+    match self {
+      Application::Browser => "1",
+      Application::Mobile => "37",
+    }
+  }
+}
+
+impl FilterValue for PropertySearchType {
+  fn value(&self) -> &'static str {
+    match self {
+      PropertySearchType::Any => "0",
+      PropertySearchType::Residential => "1",
+      PropertySearchType::Recreational => "2",
+      PropertySearchType::CondoOrStrata => "3",
+      PropertySearchType::Agriculture => "4",
+      PropertySearchType::Parking => "5",
+      PropertySearchType::VacantLand => "6",
+      PropertySearchType::MultiFamily => "8",
+    }
+  }
+}

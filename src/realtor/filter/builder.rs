@@ -1,3 +1,4 @@
+use crate::realtor::filter::FilterValue;
 use crate::realtor::filter::{Application, Language, PropertySearchType};
 use std::ops::Range;
 
@@ -155,56 +156,26 @@ impl FilterBuilder {
     query_params.push((
       FilterBuilder::CULTURE_ID,
       match self.language.as_ref() {
-        Some(v) => match v {
-          Language::English => 1.to_string(),
-          Language::French => 2.to_string(),
-        },
-        None => match Language::default() {
-          Language::English => 1.to_string(),
-          Language::French => 2.to_string(),
-        },
-      },
+        Some(v) => v.value(),
+        None => Language::default().value(),
+      }.to_string(),
     ));
 
     query_params.push((
       FilterBuilder::APPLICATION_ID,
       match self.application.as_ref() {
-        Some(v) => match v {
-          Application::Browser => 1.to_string(),
-          Application::Mobile => 37.to_string(),
-        },
-        None => match Application::default() {
-          Application::Browser => 1.to_string(),
-          Application::Mobile => 37.to_string(),
-        },
-      },
+        Some(v) => v.value(),
+        None => Application::default().value(),
+      }.to_string(),
     ));
 
     // Optional parameters
     query_params.push((
       FilterBuilder::PROPERTY_SEARCH_TYPE_ID,
       match self.property_search_type.as_ref() {
-        Some(v) => match v {
-          PropertySearchType::Any => 0.to_string(),
-          PropertySearchType::Residential => 1.to_string(),
-          PropertySearchType::Recreational => 2.to_string(),
-          PropertySearchType::CondoOrStrata => 3.to_string(),
-          PropertySearchType::Agriculture => 4.to_string(),
-          PropertySearchType::Parking => 5.to_string(),
-          PropertySearchType::VacantLand => 6.to_string(),
-          PropertySearchType::MultiFamily => 8.to_string(),
-        },
-        None => match PropertySearchType::default() {
-          PropertySearchType::Any => 0.to_string(),
-          PropertySearchType::Residential => 1.to_string(),
-          PropertySearchType::Recreational => 2.to_string(),
-          PropertySearchType::CondoOrStrata => 3.to_string(),
-          PropertySearchType::Agriculture => 4.to_string(),
-          PropertySearchType::Parking => 5.to_string(),
-          PropertySearchType::VacantLand => 6.to_string(),
-          PropertySearchType::MultiFamily => 8.to_string(),
-        },
-      },
+        Some(v) => v.value(),
+        None => PropertySearchType::default().value(),
+      }.to_string(),
     ));
 
     if let Some(v) = self.price_min {
