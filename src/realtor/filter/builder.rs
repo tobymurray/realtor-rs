@@ -48,6 +48,8 @@ impl FilterBuilder {
   const LATITUDE_MIN: &'static str = "LatitudeMin";
   const LATITUDE_MAX: &'static str = "LatitudeMax";
 
+  const CURRENT_PAGE: &'static str = "CurrentPage";
+
   // const TRANSACTION_TYPE_ID: &'static str = "CultureId";
   // const STOREY_RANGE: &'static str = "CultureId";
   // const BED_RANGE: &'static str = "CultureId";
@@ -144,7 +146,8 @@ impl FilterBuilder {
   pub fn next_page(&mut self) -> &mut FilterBuilder {
     self.page = match self.page {
       Some(current_page) => Some(current_page + 1),
-      None => Some(1),
+      // When no page is specified, the value is implicitly 1 so "next_page" starts at 2
+      None => Some(2),
     };
     self
   }
@@ -158,7 +161,8 @@ impl FilterBuilder {
       match self.language.as_ref() {
         Some(v) => v.value(),
         None => Language::default().value(),
-      }.to_string(),
+      }
+      .to_string(),
     ));
 
     query_params.push((
@@ -166,7 +170,8 @@ impl FilterBuilder {
       match self.application.as_ref() {
         Some(v) => v.value(),
         None => Application::default().value(),
-      }.to_string(),
+      }
+      .to_string(),
     ));
 
     // Optional parameters
@@ -175,7 +180,8 @@ impl FilterBuilder {
       match self.property_search_type.as_ref() {
         Some(v) => v.value(),
         None => PropertySearchType::default().value(),
-      }.to_string(),
+      }
+      .to_string(),
     ));
 
     if let Some(v) = self.price_min {
@@ -200,6 +206,10 @@ impl FilterBuilder {
 
     if let Some(v) = self.latitude_max {
       query_params.push((FilterBuilder::LATITUDE_MAX, v.to_string()))
+    }
+
+    if let Some(v) = self.page {
+      query_params.push((FilterBuilder::CURRENT_PAGE, v.to_string()))
     }
 
     query_params
