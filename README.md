@@ -26,6 +26,6 @@ let client = reqwest::Client::new();
 let request_builder = client
   .post("https://api.realtor.ca/Listing.svc/PropertySearch_Post")
   .form(&FilterBuilder::new().build())
-  .header(USER_AGENT, "realtor-rs v0.3.0")
+  .header(USER_AGENT, "realtor-rs v0.4.0")
   .send();
 ```
