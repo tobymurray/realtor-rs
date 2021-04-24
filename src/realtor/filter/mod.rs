@@ -58,6 +58,24 @@ pub enum SortBy {}
 
 pub enum SortOrder {}
 
+#[derive(Debug)]
+pub enum LandSize {
+  Any,
+  OneOrMoreAcres,
+  TwoOrMoreAcres,
+  FiveOrMoreAcres,
+  TenOrMoreAcres,
+  FiftyOrMoreAcres,
+  OneHundredOrMoreAcres,
+  TwoHundredOrMoreAcres,
+  ThreeHundredOrMoreAcres,
+  FourHundredOrMoreAcres,
+  FiveHundredOrMoreAcres,
+  OneThousandOrMoreAcres,
+}
+
+
+
 trait FilterValue {
   fn value(&self) -> &'static str;
 }

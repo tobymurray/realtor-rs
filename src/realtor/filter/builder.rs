@@ -1,5 +1,5 @@
 use crate::realtor::filter::FilterValue;
-use crate::realtor::filter::{Application, Language, PropertySearchType};
+use crate::realtor::filter::{Application, LandSize, Language, PropertySearchType};
 use std::ops::Range;
 
 #[derive(Debug, Default)]
@@ -19,7 +19,7 @@ pub struct FilterBuilder {
   rent_range: Option<Range<u8>>,
   storey_range: Option<Range<u8>>,
   building_size_range: Option<Range<u8>>,
-  land_size_range: Option<Range<u8>>,
+  land_size: Option<LandSize>,
   // farm_type: FarmType,
   // parking_type: ParkingType
   // zoning_type_group: ZoningTypeGroup,
@@ -135,6 +135,11 @@ impl FilterBuilder {
 
   pub fn latitude_max(&mut self, latitude_max: f64) -> &mut FilterBuilder {
     self.latitude_max = Some(latitude_max);
+    self
+  }
+
+  pub fn land_size(&mut self, land_size: LandSize) -> &mut FilterBuilder {
+    self.land_size = Some(land_size);
     self
   }
 
