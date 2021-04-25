@@ -1,6 +1,7 @@
 use crate::realtor::filter::FilterValue;
-use crate::realtor::filter::{Application, LandSize, Language, PropertySearchType};
-use std::ops::Range;
+use crate::realtor::filter::{
+  Application, LandSize, Language, OwnershipType, PropertySearchType, TransactionType,
+};
 
 #[derive(Debug, Default)]
 pub struct FilterBuilder {
@@ -13,22 +14,23 @@ pub struct FilterBuilder {
   latitude_max: Option<f64>,
   price_min: Option<u32>,
   price_max: Option<u32>,
-  bed_range: Option<Range<u8>>,
-  bath_range: Option<Range<u8>>,
-  unit_range: Option<Range<u8>>,
-  rent_range: Option<Range<u8>>,
-  storey_range: Option<Range<u8>>,
-  building_size_range: Option<Range<u8>>,
+  // bed_range: Option<Range<u8>>,
+  // bath_range: Option<Range<u8>>,
+  // unit_range: Option<Range<u8>>,
+  // rent_range: Option<Range<u8>>,
+  // storey_range: Option<Range<u8>>,
+  // building_size_range: Option<Range<u8>>,
   land_size: Option<LandSize>,
   // farm_type: FarmType,
   // parking_type: ParkingType
   // zoning_type_group: ZoningTypeGroup,
-  open_house: Option<bool>,
+  // open_house: Option<bool>,
   // building_type: BuildingType,
   // construction_style: ConstructionStyle,
-  keywords: Option<Vec<String>>,
-  hash_code: Option<String>,
-  // transaction_type: Transactiontype,
+  // keywords: Option<Vec<String>>,
+  // hash_code: Option<String>,
+  transaction_type: Option<TransactionType>,
+  ownership_type: Option<OwnershipType>,
   // sort_by: SortBy,
   // sort_order: SortOrder,
   page: Option<u16>,
@@ -48,6 +50,8 @@ impl FilterBuilder {
   const LONGITUDE_MAX: &'static str = "LongitudeMax";
   const LATITUDE_MIN: &'static str = "LatitudeMin";
   const LATITUDE_MAX: &'static str = "LatitudeMax";
+  const TRANSACTION_TYPE: &'static str = "TransactionType";
+  const OWNERSHIP_TYPE: &'static str = "OwnershipTypeGroupId";
 
   const CURRENT_PAGE: &'static str = "CurrentPage";
   const RECORDS_PER_PAGE: &'static str = "RecordsPerPage";
@@ -145,6 +149,16 @@ impl FilterBuilder {
     self
   }
 
+  pub fn transaction_type(&mut self, transaction_type: TransactionType) -> &mut FilterBuilder {
+    self.transaction_type = Some(transaction_type);
+    self
+  }
+
+  pub fn ownership_type(&mut self, ownership_type: OwnershipType) -> &mut FilterBuilder {
+    self.ownership_type = Some(ownership_type);
+    self
+  }
+
   pub fn page(&mut self, page: u16) -> &mut FilterBuilder {
     self.page = Some(page);
     self
@@ -160,6 +174,7 @@ impl FilterBuilder {
   }
 
   pub fn records_per_page(&mut self, records_per_page: u16) -> &mut FilterBuilder {
+    // The max here is 200
     self.records_per_page = Some(records_per_page);
     self
   }
@@ -218,6 +233,14 @@ impl FilterBuilder {
 
     if let Some(v) = self.latitude_max {
       query_params.push((FilterBuilder::LATITUDE_MAX, v.to_string()))
+    }
+
+    if let Some(v) = self.transaction_type.as_ref() {
+      query_params.push((FilterBuilder::TRANSACTION_TYPE, v.value().to_string()))
+    }
+
+    if let Some(v) = self.ownership_type.as_ref() {
+      query_params.push((FilterBuilder::OWNERSHIP_TYPE, v.value().to_string()))
     }
 
     if let Some(v) = self.page {

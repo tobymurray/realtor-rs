@@ -52,7 +52,33 @@ pub enum BuildingType {}
 
 pub enum ConstructionStyle {}
 
-pub enum Transactiontype {}
+#[derive(Debug)]
+pub enum TransactionType {
+  Any,
+  ForSale,
+  ForRent,
+}
+
+impl Default for TransactionType {
+  fn default() -> Self {
+    TransactionType::ForSale
+  }
+}
+
+#[derive(Debug)]
+pub enum OwnershipType {
+  Any,
+  Freehold,
+  CondoOrStrata,
+  TimeshareOrFractional,
+  Leasehold,
+}
+
+impl Default for OwnershipType {
+  fn default() -> Self {
+    OwnershipType::Any
+  }
+}
 
 pub enum SortBy {}
 
@@ -107,6 +133,28 @@ impl FilterValue for PropertySearchType {
       PropertySearchType::Parking => "5",
       PropertySearchType::VacantLand => "6",
       PropertySearchType::MultiFamily => "8",
+    }
+  }
+}
+
+impl FilterValue for TransactionType {
+  fn value(&self) -> &'static str {
+    match self {
+      TransactionType::Any => "0",
+      TransactionType::ForSale => "1",
+      TransactionType::ForRent => "2",
+    }
+  }
+}
+
+impl FilterValue for OwnershipType {
+  fn value(&self) -> &'static str {
+    match self {
+      OwnershipType::Any => "0",
+      OwnershipType::Freehold => "1",
+      OwnershipType::CondoOrStrata => "2",
+      OwnershipType::TimeshareOrFractional => "3",
+      OwnershipType::Leasehold => "4",
     }
   }
 }
