@@ -10,13 +10,16 @@ Filters:
 - price range
 - longitude range
 - latitude range
+- ownership type
+- transaction type
 
 Metadata:
-- paging through results (fixed page size currently)
+- paging through results
+- records per page (max of 200 is unenforced)
 
 ## How to use
 
-This provides syntactic sugar for building HTML form data, the output is `Vec<(&'static str, String)>`. This should be flexible enough to be consumed by any HTTP client, e.g. for [reqwest](https://lib.rs/crates/reqwest) it might look like:
+This provides syntactic sugar for building HTML form data specific to this one API. The output is `Vec<(&'static str, String)>`. This should be flexible enough to be consumed by any HTTP client, e.g. for [reqwest](https://lib.rs/crates/reqwest) it might look like:
 
 ```rust
 use realtor_rs::realtor::filter::builder::FilterBuilder;
@@ -26,6 +29,6 @@ let client = reqwest::Client::new();
 let request_builder = client
   .post("https://api.realtor.ca/Listing.svc/PropertySearch_Post")
   .form(&FilterBuilder::new().build())
-  .header(USER_AGENT, "realtor-rs v0.4.0")
+  .header(USER_AGENT, "realtor-rs v0.5.0")
   .send();
 ```
