@@ -143,7 +143,7 @@ pub struct Individual {
   #[serde(rename = "PermitShowListingLink")]
   pub permit_show_listing_link: bool,
   #[serde(rename = "Phones")]
-  pub phones: Vec<Phone2>,
+  pub phones: Option<Vec<Phone2>>,
   #[serde(rename = "Photo")]
   pub photo: Option<String>,
   #[serde(rename = "PhotoHighRes")]
@@ -183,7 +183,7 @@ pub struct Organization {
   #[serde(rename = "PermitShowListingLink")]
   pub permit_show_listing_link: bool,
   #[serde(rename = "Phones")]
-  pub phones: Vec<Phone>,
+  pub phones: Option<Vec<Phone>>,
   #[serde(rename = "PhotoLastupdate")]
   pub photo_lastupdate: String,
   #[serde(rename = "RelativeDetailsURL")]
@@ -317,9 +317,9 @@ pub struct Address2 {
   #[serde(rename = "DisseminationArea")]
   pub dissemination_area: ::serde_json::Value,
   #[serde(rename = "Latitude")]
-  pub latitude: String,
+  pub latitude: Option<String>,
   #[serde(rename = "Longitude")]
-  pub longitude: String,
+  pub longitude: Option<String>,
   #[serde(rename = "PermitShowAddress")]
   pub permit_show_address: bool,
 }
@@ -364,6 +364,7 @@ pub enum PropertyTypeId {
   Business,
   Industrial,
   Parking,
+  InstitutionalSpecialPurpose,
   MultiFamily,
   Other,
 }
@@ -380,6 +381,7 @@ impl From<u32> for PropertyTypeId {
       306 => PropertyTypeId::Business,
       307 => PropertyTypeId::Industrial,
       308 => PropertyTypeId::Parking,
+      309 => PropertyTypeId::InstitutionalSpecialPurpose,
       310 => PropertyTypeId::MultiFamily,
       311 => PropertyTypeId::Other,
       _ => panic!("Can't map {} to PropertyTypeId", type_id),
