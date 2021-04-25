@@ -80,6 +80,32 @@ impl Default for OwnershipType {
   }
 }
 
+impl From<u8> for OwnershipType {
+  fn from(id: u8) -> OwnershipType {
+    match id {
+      0 => OwnershipType::Any,
+      1 => OwnershipType::Freehold,
+      2 => OwnershipType::CondoOrStrata,
+      3 => OwnershipType::TimeshareOrFractional,
+      4 => OwnershipType::Leasehold,
+      _ => panic!("Can't map {} to OwnershipType", id),
+    }
+  }
+}
+
+impl From<&u8> for OwnershipType {
+  fn from(id: &u8) -> OwnershipType {
+    match id {
+      0 => OwnershipType::Any,
+      1 => OwnershipType::Freehold,
+      2 => OwnershipType::CondoOrStrata,
+      3 => OwnershipType::TimeshareOrFractional,
+      4 => OwnershipType::Leasehold,
+      _ => panic!("Can't map {} to OwnershipType", id),
+    }
+  }
+}
+
 pub enum SortBy {}
 
 pub enum SortOrder {}

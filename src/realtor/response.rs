@@ -290,7 +290,7 @@ pub struct Property {
   pub ownership_type: Option<String>,
   #[serde(rename = "OwnershipTypeGroupIds")]
   #[serde(default)]
-  pub ownership_type_group_ids: Vec<i64>,
+  pub ownership_type_group_ids: Vec<u8>,
   #[serde(rename = "Parking")]
   pub parking: Option<Vec<Parking>>,
   #[serde(rename = "ParkingType")]
@@ -388,3 +388,4 @@ impl From<u32> for PropertyTypeId {
     }
   }
 }
+
