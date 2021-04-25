@@ -32,6 +32,7 @@ pub struct FilterBuilder {
   // sort_by: SortBy,
   // sort_order: SortOrder,
   page: Option<u16>,
+  records_per_page: Option<u16>,
 }
 
 impl FilterBuilder {
@@ -49,6 +50,7 @@ impl FilterBuilder {
   const LATITUDE_MAX: &'static str = "LatitudeMax";
 
   const CURRENT_PAGE: &'static str = "CurrentPage";
+  const RECORDS_PER_PAGE: &'static str = "RecordsPerPage";
 
   // const TRANSACTION_TYPE_ID: &'static str = "CultureId";
   // const STOREY_RANGE: &'static str = "CultureId";
@@ -157,6 +159,11 @@ impl FilterBuilder {
     self
   }
 
+  pub fn records_per_page(&mut self, records_per_page: u16) -> &mut FilterBuilder {
+    self.records_per_page = Some(records_per_page);
+    self
+  }
+
   pub fn build(&self) -> Vec<(&'static str, String)> {
     let mut query_params = Vec::new();
 
@@ -215,6 +222,10 @@ impl FilterBuilder {
 
     if let Some(v) = self.page {
       query_params.push((FilterBuilder::CURRENT_PAGE, v.to_string()))
+    }
+
+    if let Some(v) = self.records_per_page {
+      query_params.push((FilterBuilder::RECORDS_PER_PAGE, v.to_string()))
     }
 
     query_params

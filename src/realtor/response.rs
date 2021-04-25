@@ -304,7 +304,7 @@ pub struct Property {
   #[serde(rename = "Type")]
   pub type_field: Option<String>,
   #[serde(rename = "TypeId")]
-  pub type_id: String,
+  pub type_id: Option<String>,
   #[serde(rename = "ParkingSpaceTotal")]
   pub parking_space_total: Option<String>,
 }
@@ -351,4 +351,38 @@ pub struct Photo {
 pub struct AlternateUrl {
   #[serde(rename = "VideoLink")]
   pub video_link: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub enum PropertyTypeId {
+  SingleFamily,
+  Recreational,
+  Agriculture,
+  VacantLand,
+  Office,
+  Retail,
+  Business,
+  Industrial,
+  Parking,
+  MultiFamily,
+  Other,
+}
+
+impl From<u32> for PropertyTypeId {
+  fn from(type_id: u32) -> PropertyTypeId {
+    match type_id {
+      300 => PropertyTypeId::SingleFamily,
+      301 => PropertyTypeId::Recreational,
+      302 => PropertyTypeId::Agriculture,
+      303 => PropertyTypeId::VacantLand,
+      304 => PropertyTypeId::Office,
+      305 => PropertyTypeId::Retail,
+      306 => PropertyTypeId::Business,
+      307 => PropertyTypeId::Industrial,
+      308 => PropertyTypeId::Parking,
+      310 => PropertyTypeId::MultiFamily,
+      311 => PropertyTypeId::Other,
+      _ => panic!("Can't map {} to PropertyTypeId", type_id),
+    }
+  }
 }

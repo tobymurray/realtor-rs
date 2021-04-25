@@ -74,8 +74,6 @@ pub enum LandSize {
   OneThousandOrMoreAcres,
 }
 
-
-
 trait FilterValue {
   fn value(&self) -> &'static str;
 }
