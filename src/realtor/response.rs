@@ -61,6 +61,13 @@ pub struct Pin {
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
+pub struct AdditionalInfo {
+  pub normalized_land_in_acres: Option<f64>,
+  pub absolute_url: Option<String>,
+}
+
+#[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct Result {
   #[serde(rename = "Building")]
   pub building: Building,
@@ -96,6 +103,7 @@ pub struct Result {
   pub status_id: String,
   #[serde(rename = "AlternateURL")]
   pub alternate_url: Option<AlternateUrl>,
+  pub additional_info: Option<AdditionalInfo>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -275,6 +283,7 @@ pub struct Land {
   pub current_use: Option<String>,
   #[serde(rename = "LandscapeFeatures")]
   pub landscape_features: Option<String>,
+  pub normalized_land_in_acres: Option<f64>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -388,4 +397,3 @@ impl From<u32> for PropertyTypeId {
     }
   }
 }
-
