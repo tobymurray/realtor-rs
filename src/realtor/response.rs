@@ -4,59 +4,59 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct Response {
   #[serde(rename = "ErrorCode")]
-  pub error_code: ErrorCode,
+  pub error_code: Option<ErrorCode>,
   #[serde(rename = "GroupingLevel")]
   pub grouping_level: Option<String>,
   #[serde(rename = "Paging")]
-  pub paging: Paging,
+  pub paging: Option<Paging>,
   #[serde(rename = "Pins")]
-  pub pins: Vec<Pin>,
+  pub pins: Option<Vec<Pin>>,
   #[serde(rename = "Results")]
-  pub results: Vec<Result>,
+  pub results: Option<Vec<Result>>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ErrorCode {
   #[serde(rename = "Description")]
-  pub description: String,
+  pub description: Option<String>,
   #[serde(rename = "Id")]
-  pub id: i64,
+  pub id: Option<i64>,
   #[serde(rename = "ProductName")]
-  pub product_name: String,
+  pub product_name: Option<String>,
   #[serde(rename = "Status")]
   pub status: Option<String>,
   #[serde(rename = "Version")]
-  pub version: String,
+  pub version: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Paging {
   #[serde(rename = "CurrentPage")]
-  pub current_page: i64,
+  pub current_page: Option<i64>,
   #[serde(rename = "MaxRecords")]
-  pub max_records: i64,
+  pub max_records: Option<i64>,
   #[serde(rename = "Pins")]
-  pub pins: i64,
+  pub pins: Option<i64>,
   #[serde(rename = "RecordsPerPage")]
-  pub records_per_page: i64,
+  pub records_per_page: Option<i64>,
   #[serde(rename = "RecordsShowing")]
-  pub records_showing: i64,
+  pub records_showing: Option<i64>,
   #[serde(rename = "TotalPages")]
-  pub total_pages: i64,
+  pub total_pages: Option<i64>,
   #[serde(rename = "TotalRecords")]
-  pub total_records: i64,
+  pub total_records: Option<i64>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Pin {
-  pub count: i64,
-  pub key: String,
-  pub latitude: String,
-  pub longitude: String,
-  pub property_id: String,
+  pub count: Option<i64>,
+  pub key: Option<String>,
+  pub latitude: Option<String>,
+  pub longitude: Option<String>,
+  pub property_id: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -71,37 +71,37 @@ pub struct AdditionalInfo {
 #[serde(rename_all = "camelCase")]
 pub struct Result {
   #[serde(rename = "Building")]
-  pub building: Building,
+  pub building: Option<Building>,
   #[serde(rename = "Business")]
-  pub business: Business,
+  pub business: Option<Business>,
   #[serde(rename = "Distance")]
-  pub distance: String,
+  pub distance: Option<String>,
   #[serde(rename = "HasNewImageUpdate")]
   pub has_new_image_update: Option<bool>,
   #[serde(rename = "Id")]
-  pub id: String,
+  pub id: Option<String>,
   #[serde(rename = "Individual")]
-  pub individual: Vec<Individual>,
+  pub individual: Option<Vec<Individual>>,
   #[serde(rename = "Land")]
-  pub land: Land,
+  pub land: Option<Land>,
   #[serde(rename = "MlsNumber")]
-  pub mls_number: String,
+  pub mls_number: Option<String>,
   #[serde(rename = "PhotoChangeDateUTC")]
   pub photo_change_date_utc: Option<String>,
   #[serde(rename = "PostalCode")]
-  pub postal_code: String,
+  pub postal_code: Option<String>,
   #[serde(rename = "Property")]
-  pub property: Property,
+  pub property: Option<Property>,
   #[serde(rename = "PublicRemarks")]
-  pub public_remarks: String,
+  pub public_remarks: Option<String>,
   #[serde(rename = "RelativeDetailsURL")]
-  pub relative_details_url: String,
+  pub relative_details_url: Option<String>,
   #[serde(rename = "RelativeURLEn")]
-  pub relative_urlen: String,
+  pub relative_urlen: Option<String>,
   #[serde(rename = "RelativeURLFr")]
-  pub relative_urlfr: String,
+  pub relative_urlfr: Option<String>,
   #[serde(rename = "StatusId")]
-  pub status_id: String,
+  pub status_id: Option<String>,
   #[serde(rename = "AlternateURL")]
   pub alternate_url: Option<AlternateUrl>,
   pub additional_info: Option<AdditionalInfo>,
@@ -134,7 +134,7 @@ pub struct Individual {
   #[serde(rename = "AgentPhotoLastUpdated")]
   pub agent_photo_last_updated: Option<String>,
   #[serde(rename = "CorporationDisplayTypeId")]
-  pub corporation_display_type_id: String,
+  pub corporation_display_type_id: Option<String>,
   #[serde(rename = "Emails")]
   pub emails: Option<Vec<Email>>,
   #[serde(rename = "FirstName")]
@@ -146,7 +146,7 @@ pub struct Individual {
   #[serde(rename = "Name")]
   pub name: Option<String>,
   #[serde(rename = "Organization")]
-  pub organization: Organization,
+  pub organization: Option<Organization>,
   #[serde(rename = "PermitFreetextEmail")]
   pub permit_freetext_email: Option<bool>,
   #[serde(rename = "PermitShowListingLink")]
@@ -160,11 +160,11 @@ pub struct Individual {
   #[serde(rename = "Position")]
   pub position: Option<String>,
   #[serde(rename = "RankMyAgentKey")]
-  pub rank_my_agent_key: String,
+  pub rank_my_agent_key: Option<String>,
   #[serde(rename = "RealSatisfiedKey")]
-  pub real_satisfied_key: String,
+  pub real_satisfied_key: Option<String>,
   #[serde(rename = "RelativeDetailsURL")]
-  pub relative_details_url: String,
+  pub relative_details_url: Option<String>,
   #[serde(rename = "Websites")]
   pub websites: Option<Vec<Website>>,
 }
@@ -173,30 +173,30 @@ pub struct Individual {
 #[serde(rename_all = "camelCase")]
 pub struct Email {
   #[serde(rename = "ContactId")]
-  pub contact_id: String,
+  pub contact_id: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Organization {
   #[serde(rename = "Address")]
-  pub address: Address,
+  pub address: Option<Address>,
   #[serde(rename = "Name")]
   pub name: Option<String>,
   #[serde(rename = "OrganizationID")]
-  pub organization_id: i64,
+  pub organization_id: Option<i64>,
   #[serde(rename = "OrganizationType")]
-  pub organization_type: String,
+  pub organization_type: Option<String>,
   #[serde(rename = "PermitFreetextEmail")]
-  pub permit_freetext_email: bool,
+  pub permit_freetext_email: Option<bool>,
   #[serde(rename = "PermitShowListingLink")]
   pub permit_show_listing_link: Option<bool>,
   #[serde(rename = "Phones")]
   pub phones: Option<Vec<Phone>>,
   #[serde(rename = "PhotoLastupdate")]
-  pub photo_lastupdate: String,
+  pub photo_lastupdate: Option<String>,
   #[serde(rename = "RelativeDetailsURL")]
-  pub relative_details_url: String,
+  pub relative_details_url: Option<String>,
   #[serde(rename = "Emails")]
   #[serde(default)]
   pub emails: Option<Vec<Email>>,
@@ -206,7 +206,7 @@ pub struct Organization {
   pub logo: Option<String>,
   #[serde(rename = "Websites")]
   #[serde(default)]
-  pub websites: Vec<Website>,
+  pub websites: Option<Vec<Website>>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -215,35 +215,35 @@ pub struct Address {
   #[serde(rename = "AddressText")]
   pub address_text: Option<String>,
   #[serde(rename = "DisseminationArea")]
-  pub dissemination_area: ::serde_json::Value,
+  pub dissemination_area: Option<::serde_json::Value>,
   #[serde(rename = "Latitude")]
   pub latitude: Option<String>,
   #[serde(rename = "Longitude")]
   pub longitude: Option<String>,
   #[serde(rename = "PermitShowAddress")]
-  pub permit_show_address: bool,
+  pub permit_show_address: Option<bool>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Phone {
   #[serde(rename = "AreaCode")]
-  pub area_code: String,
+  pub area_code: Option<String>,
   #[serde(rename = "PhoneNumber")]
-  pub phone_number: String,
+  pub phone_number: Option<String>,
   #[serde(rename = "PhoneType")]
-  pub phone_type: String,
+  pub phone_type: Option<String>,
   #[serde(rename = "PhoneTypeId")]
-  pub phone_type_id: String,
+  pub phone_type_id: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Website {
   #[serde(rename = "Website")]
-  pub website: String,
+  pub website: Option<String>,
   #[serde(rename = "WebsiteTypeId")]
-  pub website_type_id: String,
+  pub website_type_id: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -266,16 +266,16 @@ pub struct Land {
 #[serde(rename_all = "camelCase")]
 pub struct Property {
   #[serde(rename = "Address")]
-  pub address: Address,
+  pub address: Option<Address>,
   #[serde(rename = "AmmenitiesNearBy")]
   pub ammenities_near_by: Option<String>,
   #[serde(rename = "ConvertedPrice")]
-  pub converted_price: String,
+  pub converted_price: Option<String>,
   #[serde(rename = "OwnershipType")]
   pub ownership_type: Option<String>,
   #[serde(rename = "OwnershipTypeGroupIds")]
   #[serde(default)]
-  pub ownership_type_group_ids: Vec<u8>,
+  pub ownership_type_group_ids: Option<Vec<u8>>,
   #[serde(rename = "Parking")]
   pub parking: Option<Vec<Parking>>,
   #[serde(rename = "ParkingType")]
@@ -305,15 +305,15 @@ pub struct Parking {
 #[serde(rename_all = "camelCase")]
 pub struct Photo {
   #[serde(rename = "HighResPath")]
-  pub high_res_path: String,
+  pub high_res_path: Option<String>,
   #[serde(rename = "LastUpdated")]
-  pub last_updated: String,
+  pub last_updated: Option<String>,
   #[serde(rename = "LowResPath")]
-  pub low_res_path: String,
+  pub low_res_path: Option<String>,
   #[serde(rename = "MedResPath")]
-  pub med_res_path: String,
+  pub med_res_path: Option<String>,
   #[serde(rename = "SequenceId")]
-  pub sequence_id: String,
+  pub sequence_id: Option<String>,
 }
 
 #[derive(Default, Debug, Clone, PartialEq, Serialize, Deserialize)]
