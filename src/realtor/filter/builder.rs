@@ -2,6 +2,33 @@ use crate::realtor::filter::FilterValue;
 use crate::realtor::filter::{
   Application, LandSize, Language, OwnershipType, PropertySearchType, TransactionType,
 };
+use std::error::Error;
+use std::fmt;
+
+#[derive(Debug)]
+pub struct ValidationError {
+  details: String,
+}
+
+impl ValidationError {
+  fn new(msg: String) -> ValidationError {
+    ValidationError {
+      details: msg,
+    }
+  }
+}
+
+impl fmt::Display for ValidationError {
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    write!(f, "{}", self.details)
+  }
+}
+
+impl Error for ValidationError {
+  fn description(&self) -> &str {
+    &self.details
+  }
+}
 
 #[derive(Debug, Default)]
 pub struct FilterBuilder {
@@ -173,10 +200,19 @@ impl FilterBuilder {
     self
   }
 
-  pub fn records_per_page(&mut self, records_per_page: u16) -> &mut FilterBuilder {
-    // The max here is 200
-    self.records_per_page = Some(records_per_page);
-    self
+  pub fn records_per_page(
+    &mut self,
+    records_per_page: u16,
+  ) -> Result<&mut FilterBuilder, ValidationError> {
+    if records_per_page > 200 {
+      Err(ValidationError::new(format!(
+        "Maximum number of records per page is 200, requested was {}",
+        records_per_page,
+      )))
+    } else {
+      self.records_per_page = Some(records_per_page);
+      Ok(self)
+    }
   }
 
   pub fn build(&self) -> Vec<(&'static str, String)> {

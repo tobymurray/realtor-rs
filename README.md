@@ -15,7 +15,7 @@ Filters:
 
 Metadata:
 - paging through results
-- records per page (max of 200 is unenforced)
+- records per page (max of 200)
 
 ## How to use
 
