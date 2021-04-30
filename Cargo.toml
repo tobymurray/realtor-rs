@@ -1,6 +1,6 @@
 [package]
 name = "realtor-rs"
-version = "0.5.0"
+version = "0.6.0"
 authors = ["Toby Murray <toby.murray@protonmail.com>"]
 edition = "2018"
 description = "Unofficial client for Canadian Realtor site"
