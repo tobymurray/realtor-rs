@@ -348,3 +348,13 @@ impl From<u32> for PropertyTypeId {
     }
   }
 }
+
+impl Land {
+  pub fn contains_data(&self) -> bool {
+    self.access_type.is_some()
+      || self.size_frontage.is_some()
+      || self.size_total.is_some()
+      || self.current_use.is_some()
+      || self.landscape_features.is_some()
+  }
+}
